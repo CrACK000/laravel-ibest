@@ -19,7 +19,7 @@
 
                 @include('components.categories')
 
-                <div class="d-flex flex-column flex-md-row align-items-center mb-2">
+                <div class="d-flex flex-column flex-md-row align-items-center mb-3">
                     <div class="me-auto small">
                         Zoradiť podľa:
                         <a href="{{ route('filter', ['sort_by' => 'top']) }}" class="mx-1 {{ ($getSortBy == 'top' or !$getSortBy) ? "fw-bold" : "" }}">
