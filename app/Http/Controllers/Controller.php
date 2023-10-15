@@ -29,7 +29,7 @@ class Controller extends BaseController
     public function redirect(string $productId, int $shopId): RedirectResponse
     {
         /*
-         * @todo spraviť zapisovanie štatistiky
+         * @todo spraviť zapisovanie štatistiky s
          */
 
         $shop_data = DB::table('shops')->where('id', $shopId)->first();
