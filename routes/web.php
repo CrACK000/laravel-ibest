@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomePage;
 use App\Http\Controllers\ProductDetails;
 use App\Http\Controllers\Search;
@@ -19,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomePage::class, 'index']);
 Route::get('/product/{productId}', [ProductDetails::class, 'productView'])->name('product');
 Route::get('/search/', [Search::class, 'searchResult'])->name('searchResult');
+
 Route::get('/search/filter/', [Search::class, 'filter'])->name('filter');
+Route::get('/redirect/{productId}/{shopId}', [Controller::class, 'redirect'])->name('redirect');
