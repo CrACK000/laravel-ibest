@@ -17,7 +17,7 @@
 
     <div class="container-fluid col-md-10 mt-4">
 
-        NavBar*
+        @include('layout.parts.navbar')
 
         <div class="col-lg-11 mx-auto">
 
@@ -119,7 +119,7 @@
 
                             @php($vouchers      = DB::table('vouchers')->where('shop_id', $shop->id)->orderByDesc('value')->limit(2)->get())
                             @php($xmlData       = DB::table($shop->db_xml)->where('id', $productData->$var)->first())
-                            @php($shop_price    = round(str_replace(',',' ', $xmlData->price)))
+                            @php($shop_price    = round(str_replace(',','', $xmlData->price)))
 
                             <div class='bg-white p-3 rounded-4 scale-box mb-1'>
                                 <div class='row g-3 align-items-center'>

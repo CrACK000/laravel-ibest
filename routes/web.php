@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomePage::class, 'index']);
+Route::get('/', [HomePage::class, 'index'])->name('homePage');
 Route::get('/product/{productId}', [ProductDetails::class, 'productView'])->name('product');
-Route::get('/search/', [Search::class, 'searchResult'])->name('searchResult');
-
-Route::get('/search/filter/', [Search::class, 'filter'])->name('filter');
 Route::get('/redirect/{productId}/{shopId}', [Controller::class, 'redirect'])->name('redirect');
+
+Route::get('/search/', [Search::class, 'search_result'])->name('searchResult');
+Route::get('/search/filter/', [Search::class, 'filter'])->name('filter');
+Route::get('/search/result/', [Search::class, 'search_products'])->name('ajaxSearchProducts');
+
+// User routes
+Route::get('/my/list/', function () { return "dokončiť"; })->name('myListProducts'); // @todo dokončiť route

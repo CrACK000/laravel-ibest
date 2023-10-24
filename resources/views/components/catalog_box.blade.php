@@ -2,41 +2,55 @@
 
     use App\Http\Controllers\ProductDetails;
     use App\Http\Controllers\ProductRating;
+    use Illuminate\Support\Str;
 
 @endphp
 
-<div class="row g-md-4 g-2 mb-4 align-items-end">
+<div class="row g-md-5 g-2 mb-4 align-items-stretch">
 
-    @foreach($getProducts as $product)
+    @forelse($getProducts as $product)
 
         <div class="col-lg-3 col-6">
             <a href="{{ route('product', ['productId' => $product->id]) }}" class="text-decoration-none text-body">
-                <div class="bg-white p-3 rounded-4 content-body item-box" style="margin-top: 75px">
+                <div class="bg-white p-3 rounded-4 item-box d-flex flex-column h-100 position-relative">
 
-                    @php($main_img = ProductDetails::main_img_product($product->id, '400x400'))
-
-                    <div class="text-center">
-                        <img src="{{ $main_img }}" class="mw-100 rounded-3" alt="{{ $product->title }}">
+                    <div class="text-center py-2 mb-3">
+                        <img src="{{ ProductDetails::main_img_product($product->id, '400x400') }}" class="mw-100 rounded-3" alt="{{ $product->title }}">
                     </div>
 
-                    <div class="small mt-3 lh-sm">
+                    <div class="small mb-2 lh-sm">
                         {{ $product->title }}
                     </div>
 
-                    <div class="d-flex mt-2 fw-semibold align-items-end">
+                    <div class="mini mb-3 lh-sm text-muted fw-normal">
+                        {{ Str::limit($product->brief_description, 140) }}
+                    </div>
+
+                    <div class="d-flex mt-auto fw-semibold align-items-end">
                         <div class="text-primary small">
                             <i class="fas fa-star"></i> {{ ProductRating::percent_rate($product->id) }}%
                         </div>
                         @if($product->price > 0)
-                            <div class="ms-auto">
+                            <div class="ms-auto fs-5">
                                 {{ round($product->price) }} €
                             </div>
                         @endif
                     </div>
+
+                    <div class="position-absolute top-0 end-0">
+                        <button type="button" id="productFavoriteAdd" class="btn btn-link p-3 lh-1 link-secondary text-decoration-none" data-productId="{{ $product->id }}" data-bs-toggle="tooltip" data-bs-title="Default tooltip">
+                            <i class="favoriteIcon fa-regular fa-heart fs-4"></i>
+                        </button>
+                    </div>
+
                 </div>
             </a>
         </div>
 
-    @endforeach
+    @empty
+
+        @include('components.empty_result')
+
+    @endforelse
 
 </div>

@@ -15,7 +15,7 @@
 
                 <div class="col-lg-3 col-6">
                     <a href="{{ route('searchResult', ['categories' => $category->id]) }}" class="link-body-emphasis text-decoration-none pill-categories">
-                        <div class="bg-body p-2 rounded-3 content-body d-flex align-items-center pill">
+                        <div class="bg-body p-2 rounded-3 d-flex align-items-center pill">
                             <img
                                 src="https://admin.ibest.sk/assets/images/categories/{{ $category->img }}"
                                 class="me-2 rounded"
@@ -46,12 +46,13 @@
             @endif
         @endif
 
-        @if($countCategories < 10)
+        @if($countCategories < 10 or $getSearchMain)
+
             <!-- @todo dokončiť button "Potrebujete podradiť ?" -->
 
             <div class="col-lg-3 col-6">
                 <a href="#" class="link-body-emphasis text-decoration-none pill-categories">
-                    <div class="bg-body p-2 rounded-3 content-body d-flex align-items-center pill d-flex align-items-center small">
+                    <div class="bg-body p-2 rounded-3 d-flex align-items-center pill d-flex align-items-center small">
                         <i class="fa-regular fa-circle-question fs-4 mx-2 my-1 opacity-75"></i>
                         <div class="ms-1">
                             Potrebujete poradiť ?

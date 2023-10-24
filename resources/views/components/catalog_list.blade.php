@@ -6,15 +6,15 @@
 
 @endphp
 
-<div class="row gy-1">
+<div class="row gy-3">
 
-    @foreach($getProducts as $product)
+    @forelse($getProducts as $product)
 
         @php($main_img = ProductDetails::main_img_product($product->id, '400x400'))
 
         <div class="col-12">
-            <div class="bg-white p-3 rounded-4 list-box">
-                <div class="row gx-4">
+            <div class="bg-body p-3 rounded-4 list-box">
+                <div class="row gx-5">
                     <div class="col-2 text-center">
                         <a href="{{ route('product', ['productId' => $product->id]) }}">
                             <div class="ratio ratio-1x1">
@@ -36,13 +36,13 @@
                                 <div class="small text-primary fw-semibold">
                                     <i class="fas fa-star"></i> {{ ProductRating::percent_rate($product->id) }}%
                                 </div>
-                                <div class="vr mx-3 my-2"></div>
+                                <div class="vr mx-3 my-3"></div>
                                 <div>
                                     <span class="text-muted small">Značka:</span> {{ $product->brand }}
                                 </div>
                             </div>
 
-                            <div class="small text-muted fw-normal">
+                            <div class="small text-muted fw-normal p-2 pt-0">
                                 {{ Str::limit($product->brief_description, 255) }}
                             </div>
 
@@ -52,8 +52,8 @@
                     <div class="col-2 d-flex flex-column">
 
                         <div class="mb-auto text-end">
-                            <button type="button" class="btn btn-link btn-lg link-danger text-decoration-none">
-                                <i class="fa-regular fa-heart"></i>
+                            <button type="button" id="productFavoriteAdd" class="btn btn-link btn-lg link-secondary text-decoration-none" data-productId="{{ $product->id }}">
+                                <i class="favoriteIcon fa-regular fa-heart fs-4"></i>
                             </button>
                         </div>
 
@@ -82,6 +82,10 @@
             </div>
         </div>
 
-    @endforeach
+    @empty
+
+        @include('components.empty_result')
+
+    @endforelse
 
 </div>

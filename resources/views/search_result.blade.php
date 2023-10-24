@@ -2,61 +2,130 @@
 
 @section('title_page', 'Vyhľadávanie - ibest.sk')
 
+@php
+
+    use Illuminate\Support\Facades\Vite;
+
+@endphp
+
 @section('content')
+
+    @mobile
+
+        <div class="position-fixed bottom-0 start-0 m-3" style="z-index: 1002;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#showFilter">
+                filter
+            </button>
+        </div>
+
+        <div class="offcanvas offcanvas-start" style="max-width: 350px;" tabindex="1302" id="showFilter" aria-labelledby="showFilterLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="showFilterLabel">Filtrovať produkty</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                @include('components.filter')
+            </div>
+        </div>
+
+    @endmobile
 
     <div class="container-fluid col-md-10 mt-4">
 
-        Navbar
-        Breadcrumb
+        @include('layout.parts.navbar')
 
-        <div class="row g-4 position-relative">
-            <div class="col-md-2">
+        @include('components.breadcrumb')
 
-                @include('components.filter')
+        <div class="row g-5">
 
-            </div>
-            <div class="col-md-10">
+            @desktop
 
-                @include('components.categories')
+                <div class="col-md-2">
+                    <div class="sticky-md-top filter-panel" id="filter" style="margin-left: -50px;">
+                        <div class="bg-body p-3 rounded-3 mt-2 mt-md-0">
 
-                <div class="d-flex flex-column flex-md-row align-items-center mb-3">
-                    <div class="me-auto small">
-                        Zoradiť podľa:
-                        <a href="{{ route('filter', ['sort_by' => 'top']) }}" class="mx-1 {{ ($getSortBy == 'top' or !$getSortBy) ? "fw-bold" : "" }}">
-                            Najobľúbenejší
-                        </a>
-                        <a href="{{ route('filter', ['sort_by' => 'best_seller']) }}" class="mx-1 {{ $getSortBy == 'best_seller' ? "fw-bold" : "" }}">
-                            Najpredávanejší
-                        </a>
-                        <a href="{{ route('filter', ['sort_by' => 'price_asc']) }}" class="mx-1 {{ $getSortBy == 'price_asc' ? "fw-bold" : "" }}">
-                            Najlacnejší
-                        </a>
-                        <a href="{{ route('filter', ['sort_by' => 'price_desc']) }}" class="mx-1 {{ $getSortBy == 'price_desc' ? "fw-bold" : "" }}">
-                            Najdrahší
-                        </a>
-                    </div>
-                    <div class="vr m-2 opacity-25 d-none d-md-block"></div>
-                    <div>
-                        <div class="nav nav-sort">
-                            <li class="nav-item">
-                                <a class="nav-link link-primary" href="#">
-                                    <i class="fas fa-th"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link-primary" href="#">
-                                    <i class="fas fa-th-list"></i>
-                                </a>
-                            </li>
+                            @include('components.filter')
+
                         </div>
                     </div>
                 </div>
 
-                @include('components.catalog_list')
+            @enddesktop
+
+            <div class="col">
+
+                @include('components.categories')
+
+                <div class="d-flex mt-5">
+                    <div class="fs-4 me-auto text-muted">
+
+                        @if($getSearchMain)
+
+                            <small class="fw-normal">Vyhľadávanie:</small> &#8222;{{ $getSearchMain }}&#8220;
+
+                        @elseif($getCategory)
+
+                            {{ $getCategoryTitle }}
+
+                        @endif
+
+                    </div>
+                    <div class="small text-muted fw-normal">
+                        <span class="fw-semibold">{{ $countProducts }}</span> výsledkov
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column flex-md-row align-items-center mb-3 mt-3 px-3">
+
+                    <div class="me-auto small">
+                        Zoradiť podľa:
+                        <a href="{{ route('filter', ['sort_by' => 'top']) }}" class="text-decoration-none mx-1 {{ ($getSortBy == 'top' or !$getSortBy) ? "fw-bold" : "" }}">
+                            Najobľúbenejší
+                        </a>
+                        <a href="{{ route('filter', ['sort_by' => 'best_seller']) }}" class="text-decoration-none mx-1 {{ $getSortBy == 'best_seller' ? "fw-bold" : "" }}">
+                            Najpredávanejší
+                        </a>
+                        <a href="{{ route('filter', ['sort_by' => 'price_asc']) }}" class="text-decoration-none mx-1 {{ $getSortBy == 'price_asc' ? "fw-bold" : "" }}">
+                            Najlacnejší
+                        </a>
+                        <a href="{{ route('filter', ['sort_by' => 'price_desc']) }}" class="text-decoration-none mx-1 {{ $getSortBy == 'price_desc' ? "fw-bold" : "" }}">
+                            Najdrahší
+                        </a>
+                    </div>
+
+                    <div class="d-md-flex align-items-center d-none">
+                        <a class="link-primary" href="{{ route('filter', ['show' => 'box']) }}">
+                            <div class="p-2 lh-1">
+                                <i class="fa-solid fa-grip fs-5"></i>
+                            </div>
+                        </a>
+                        <div class="vr m-3 opacity-25"></div>
+                        <a class="link-primary" href="{{ route('filter', ['show' => 'list']) }}">
+                            <div class="p-2 lh-1">
+                                <i class="fa-solid fa-bars fs-5"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                @desktop
+
+                    @include("components.catalog_$show_type")
+
+                @elsedesktop
+
+                    @include("components.catalog_box")
+
+                @enddesktop
 
             </div>
         </div>
 
     </div>
+
+    <script type="module">
+        {!! Vite::content('resources/js/filter.js') !!}
+    </script>
 
 @stop

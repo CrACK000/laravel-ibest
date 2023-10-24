@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Vite;
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -5,14 +9,18 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title_page')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('icon_blue.svg.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 
+@include('layout.parts.header')
+
 @yield('content')
+
+@include('layout.parts.footer')
+
+@vite('resources/js/scripts.js')
 
 </body>
 </html>

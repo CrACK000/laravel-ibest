@@ -57,4 +57,28 @@ class Controller extends BaseController
 
         }
     }
+
+    public function breadcrumb_categories($openCategoryId): array {
+
+        $openCategory = DB::table("categories")->where('id', $openCategoryId)->first();
+
+        $categories = array();
+
+        if ($openCategory) {
+
+            $openCatId = $openCategory->id;
+
+            if ($openCategory->subcategory_id) {
+
+                $categories = self::breadcrumb_categories($openCategory->subcategory_id);
+
+            }
+
+            $categories[$openCatId] = $openCategory->title;
+
+        }
+
+        return $categories;
+
+    }
 }
