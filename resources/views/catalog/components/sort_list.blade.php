@@ -6,19 +6,19 @@
 
 @endphp
 
-<div class="row gy-3">
+<div class="row gy-3 mb-5">
 
     @forelse($getProducts as $product)
 
         @php($main_img = ProductDetails::main_img_product($product->id, '400x400'))
 
         <div class="col-12">
-            <div class="bg-body p-3 rounded-4 list-box">
+            <div class="bg-body-secondary p-3 rounded-5 list-box shadow-hover">
                 <div class="row gx-5">
                     <div class="col-2 text-center">
                         <a href="{{ route('product', ['productId' => $product->id]) }}">
                             <div class="ratio ratio-1x1">
-                                <img src="{{ $main_img }}" class="rounded-3 object-fit-scale" alt="{{ $product->title }}">
+                                <img src="{{ $main_img }}" class="rounded-3 object-fit-scale remove-bg-img" alt="{{ $product->title }}">
                             </div>
                         </a>
                     </div>
@@ -84,7 +84,9 @@
 
     @empty
 
-        @include('components.empty_result')
+        <div class="bg-body-secondary p-4 rounded-5">
+            @include('components.empty_result')
+        </div>
 
     @endforelse
 

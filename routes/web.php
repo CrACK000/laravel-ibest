@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Catalog;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomePage;
 use App\Http\Controllers\ProductDetails;
@@ -21,9 +22,9 @@ Route::get('/', [HomePage::class, 'index'])->name('homePage');
 Route::get('/product/{productId}', [ProductDetails::class, 'productView'])->name('product');
 Route::get('/redirect/{productId}/{shopId}', [Controller::class, 'redirect'])->name('redirect');
 
-Route::get('/search/', [Search::class, 'search_result'])->name('searchResult');
+Route::get('/search/', [Catalog::class, 'catalog_query'])->name('searchResult');
 Route::get('/search/filter/', [Search::class, 'filter'])->name('filter');
-Route::get('/search/result/', [Search::class, 'search_products'])->name('ajaxSearchProducts');
+Route::get('/search/result/', [Search::class, 'result_search'])->name('ajaxSearchProducts');
 
 // User routes
 Route::get('/my/list/', function () { return "dokončiť"; })->name('myListProducts'); // @todo dokončiť route

@@ -14,13 +14,13 @@
 
     @if($countCategories)
 
-        @include('components.search.result_categories')
+        @include('components.modal_search.components.result_categories')
 
     @endif
 
     @if($countProducts)
 
-        @include('components.search.result_products')
+        @include('components.modal_search.components.result_products')
 
     @endif
 

@@ -9,6 +9,8 @@ class ProductDetails extends Controller
 {
     public function productView(string $productId): View
     {
+        $getSort = $_GET['sort'] ?? 0;
+
         $productData = DB::table('offers')
             ->where('offers.id', $productId)
             ->select('offers.*', 'product_uid.id as productUidID', 'product_uid.*')
@@ -20,13 +22,17 @@ class ProductDetails extends Controller
         $productRate        = ProductRating::percent_rate($productId);
         $allShops           = DB::table('shops')->orderByDesc('important')->get();
 
-        return view('product_view', [
+        $parameters = DB::table('parameters')->where('offer_id', $productId)->get();
+
+        return view('details.index', [
             'productId'         => $productId,
             'main_img'          => $main_image,
             'productData'       => $productData,
             'productGallery'    => $productGallery,
             'productRate'       => $productRate,
-            'allShops'          => $allShops
+            'allShops'          => $allShops,
+            'getSort'           => $getSort,
+            'parameters'        => $parameters
         ]);
     }
     static public function main_img_product($product_id, $resolution): string

@@ -1,5 +1,5 @@
-<div class="shadow-sm p-3 mt-5 bg-white shadow">
-    <div class="container-fluid col-md-10">
+<div class="p-3 bg-white border-top">
+    <div class="container-fluid col-md-10 text-center">
         asd
     </div>
 </div>

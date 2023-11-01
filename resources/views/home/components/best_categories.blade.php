@@ -1,17 +1,17 @@
-<div class="container-fluid col-md-10 mb-5 py-5">
+<div class="container-fluid col-md-8 mb-5 py-5">
 
-    <div class="row g-5 justify-content-center align-items-start mb-5 pt-5">
+    <div class="d-flex flex-md-row flex-column justify-content-center align-items-start mb-5 pt-5">
 
-        <div class="col-md-4">
-            <div class="d-flex flex-column text-center text-md-end mt-3">
-                <div class="fs-4 lh-1">Najviac navštevované kategórie</div>
-                <div class="small text-muted mt-3">
+        <div class="col-md-5 me-0 me-md-5">
+            <div class="d-flex flex-column text-center text-md-end mt-md-3">
+                <div class="fs-3 lh-1 fw-semibold">Najviac navštevované kategórie</div>
+                <div class="small text-muted mt-4">
                     Kategórie v ktorých ľudia najviac vyhľadávajú svoje obľúbené produkty.
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7 mt-5 mt-md-0">
             <div class="row g-md-3 g-2 flex-wrap">
 
                 @foreach ($most_cats as $category)

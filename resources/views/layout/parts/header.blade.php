@@ -4,13 +4,14 @@
         <div class="vstack">
             <div class="d-flex align-items-center w-100">
                 <a class="navbar-brand fw-semibold me-auto lh-1" href="{{ route('homePage') }}">
-                    <img src="{{ url('/full_logo_black.svg') }}" style="width: 145px;opacity: .75;">
+                    <img src="{{ asset('img/full_logo_blue.svg') }}" style="width: 145px;opacity: .75;" alt="iBest.sk">
                 </a>
 
                 <div class="d-flex align-items-center justify-content-end">
 
                     <div>
-                        <a data-bs-toggle="modal" href="#open-search" class="text-decoration-none fw-medium px-2 d-flex align-items-center">
+                        <a data-bs-toggle="modal" href="#open-search"
+                           class="text-decoration-none fw-medium px-2 d-flex align-items-center">
                             <i class="fa-solid fa-magnifying-glass fs-5"></i>
                             <span class="d-md-inline d-none ms-4">Hľadať</span>
                         </a>
@@ -32,4 +33,4 @@
     </div>
 </nav>
 
-@include('components.search.search_modal')
+@include('modal_search.modal')

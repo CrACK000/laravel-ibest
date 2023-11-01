@@ -1,4 +1,4 @@
-<nav class="mt-4 small" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav class="mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
 
         <li class="breadcrumb-item">
